@@ -1,10 +1,7 @@
-import 'dart:io';
-
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
-import 'package:myapp/HomeScreen.dart';
 import 'package:myapp/NavigatorBar.dart';
+// import 'package:myapp/Screens/HomeScreen.dart';
+// import 'package:myapp/NavigatorBar.dart';
 // import 'package:flutter/services.dart';
 import 'package:myapp/widgets/Transaction_List.dart';
 import 'package:myapp/widgets/new_Transaction.dart';
@@ -17,6 +14,7 @@ void main() {
   //   DeviceOrientation.portraitUp,
   //   DeviceOrientation.portraitDown,
   // ]);
+  // Firebase.initializeApp();
   runApp(MyApp());
 }
 
@@ -50,7 +48,7 @@ class MyApp extends StatelessWidget {
                   fontWeight: FontWeight.bold,
                 ))),
       ),
-      home: NavigationBar(),
+      home: NavigationBarProject(),
     );
   }
 }

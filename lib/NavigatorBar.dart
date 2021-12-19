@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:myapp/main.dart';
 
-import 'HomeScreen.dart';
-import 'PreviousRecord.dart';
-import 'main.dart';
+import 'Screens/HomeScreen.dart';
+import 'Screens/PreviousRecord.dart';
 
-class NavigationBar extends StatefulWidget {
-  const NavigationBar({Key? key}) : super(key: key);
+class NavigationBarProject extends StatefulWidget {
+  const NavigationBarProject({Key? key}) : super(key: key);
 
   @override
-  _NavigationBarState createState() => _NavigationBarState();
+  _NavigationBarProjectState createState() => _NavigationBarProjectState();
 }
 
-class _NavigationBarState extends State<NavigationBar> {
+class _NavigationBarProjectState extends State<NavigationBarProject> {
   int _selectedIndex = 0;
   void _onItemTapped(int index) {
     setState(() {

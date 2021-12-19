@@ -1,8 +1,5 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
-import 'package:myapp/PreviousRecord.dart';
-import 'package:myapp/main.dart';
+import 'package:myapp/widgets/new_Income.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -13,7 +10,28 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   @override
+  double netIncome = 2000.00;
+  void _netIncomeFunction(BuildContext ctx) {
+    showModalBottomSheet(
+        context: ctx,
+        builder: (_) {
+          return GestureDetector(
+            onTap: () {},
+            child: newIncome(_addNewIncome),
+            behavior: HitTestBehavior.opaque,
+          );
+        });
+  }
+
+  void _addNewIncome(double netAmount) {
+    setState(() {
+      netIncome = netAmount;
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
+    @override
     final appbar = AppBar(
       title: Text(
         'Home Screen',
@@ -108,7 +126,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                   SizedBox(
                                     height: 5,
                                   ),
-                                  Text('Rs. 2000',
+                                  Text('$netIncome',
                                       style: TextStyle(
                                           fontSize: 20,
                                           color: Colors.black54,
@@ -182,17 +200,23 @@ class _HomeScreenState extends State<HomeScreen> {
         ],
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-      floatingActionButton: Platform.isIOS
-          ? Container()
-          : FloatingActionButton(
-              elevation: 6,
-              backgroundColor: Theme.of(context).primaryColor,
-              onPressed: () {},
-              child: Icon(
-                Icons.add,
-                color: Colors.white,
-              ),
-            ),
+      floatingActionButton: FloatingActionButton(
+        elevation: 6,
+        backgroundColor: Theme.of(context).primaryColor,
+        onPressed: () {
+          // FirebaseFirestore.instance
+          //     .collection('Expenses/T7DcV5sp2fRlSqdPkPKw/values')
+          //     .snapshots()
+          //     .listen((event) {
+          //   print(event);
+          // });
+          _netIncomeFunction(context);
+        },
+        child: Icon(
+          Icons.add,
+          color: Colors.white,
+        ),
+      ),
     );
   }
 }

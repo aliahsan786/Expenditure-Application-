@@ -1,9 +1,7 @@
-import 'dart:async';
-
 import 'package:flutter/material.dart';
 
-import 'models/Transaction.dart';
-import 'widgets/Transaction_List.dart';
+import '../models/Transaction.dart';
+import '../widgets/Transaction_List.dart';
 
 class PreviousRecord extends StatefulWidget {
   const PreviousRecord({Key? key}) : super(key: key);
