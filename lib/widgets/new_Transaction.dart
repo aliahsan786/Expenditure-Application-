@@ -1,5 +1,10 @@
+// ignore_for_file: deprecated_member_use
+
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:myapp/models/DataStoreModels.dart';
+
+DataStoreModels dsm = DataStoreModels();
 
 // ignore: camel_case_types
 class new_Transaction extends StatefulWidget {
@@ -15,7 +20,7 @@ class new_Transaction extends StatefulWidget {
 class _new_TransactionState extends State<new_Transaction> {
   final _titleController = TextEditingController();
   final _amountController = TextEditingController();
-  DateTime? _selectedDate;
+  DateTime selectedDate = DateTime.now();
 
   @override
   Widget build(BuildContext context) {
@@ -28,10 +33,11 @@ class _new_TransactionState extends State<new_Transaction> {
       if (enteredTitle.isEmpty || enteredAmount <= 0) {
         return;
       }
+      DataStoreModels().insertData(enteredTitle, enteredAmount, selectedDate);
       widget.addTx(
         enteredTitle,
         enteredAmount,
-        _selectedDate,
+        selectedDate,
       );
       Navigator.of(context).pop();
     }
@@ -47,7 +53,7 @@ class _new_TransactionState extends State<new_Transaction> {
           return;
         }
         setState(() {
-          _selectedDate = pickerDate;
+          selectedDate = pickerDate;
         });
       });
     }
@@ -66,7 +72,8 @@ class _new_TransactionState extends State<new_Transaction> {
             crossAxisAlignment: CrossAxisAlignment.end,
             children: <Widget>[
               TextField(
-                decoration: InputDecoration(labelText: 'Title'),
+                decoration: InputDecoration(
+                    icon: Icon(Icons.title), labelText: 'Title'),
                 controller: _titleController,
                 onSubmitted: (_) => _submitData(),
                 // onChanged: (val) {
@@ -74,7 +81,8 @@ class _new_TransactionState extends State<new_Transaction> {
                 // },
               ),
               TextField(
-                decoration: InputDecoration(labelText: 'Amount'),
+                decoration: InputDecoration(
+                    icon: Icon(Icons.attach_money), labelText: 'Amount'),
                 controller: _amountController,
                 keyboardType: TextInputType.number,
                 onSubmitted: (_) => _submitData(),
@@ -85,20 +93,20 @@ class _new_TransactionState extends State<new_Transaction> {
                 child: Row(
                   children: <Widget>[
                     Text(
-                      _selectedDate == null
+                      selectedDate == null
                           ? 'No Date Chosen!'
-                          : DateFormat.yMd().format(_selectedDate!),
+                          : DateFormat.yMd().format(selectedDate),
                     ),
-                    FlatButton(
-                      textColor: Theme.of(context).primaryColor,
-                      onPressed: _presentDatePicker,
-                      child: Text(
-                        'Choose Date',
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                    ),
+                    // FlatButton(
+                    //   textColor: Theme.of(context).primaryColor,
+                    //   onPressed: _presentDatePicker,
+                    //   child: Text(
+                    //     'Choose Date',
+                    //     style: TextStyle(
+                    //       fontWeight: FontWeight.bold,
+                    //     ),
+                    //   ),
+                    // ),
                   ],
                 ),
               ),

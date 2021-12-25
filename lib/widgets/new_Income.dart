@@ -20,6 +20,7 @@ class _newIncomeState extends State<newIncome> {
       if (_amountController.text.isEmpty) {
         return;
       }
+      // ignore: unused_local_variable
       final enteredTitle = _amountController.text;
       final enteredAmount = double.parse(_amountController.text);
       if (_amountController.text.isEmpty || enteredAmount <= 0) {
@@ -63,8 +64,11 @@ class _newIncomeState extends State<newIncome> {
               TextField(
                 keyboardType: TextInputType.number,
                 autofocus: true,
-                decoration: InputDecoration(labelText: 'New Net Income'),
+                decoration: InputDecoration(
+                    icon: Icon(Icons.attach_money),
+                    labelText: 'New Net Income'),
                 controller: _amountController,
+
                 onSubmitted: (_) => _submitData(),
                 // onChanged: (val) {
                 //   titleInput = val;
