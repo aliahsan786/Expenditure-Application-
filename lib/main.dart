@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:myapp/NavigatorBar.dart';
@@ -22,7 +24,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Personal Expenses',
       theme: ThemeData(
-        primarySwatch: Colors.purple,
+        primarySwatch: Colors.green,
         // ignore: deprecated_member_use
         accentColor: Colors.amber,
         fontFamily: 'Quicksand',
@@ -187,11 +189,11 @@ class _MyHomePageState extends State<MyHomePage> with WidgetsBindingObserver {
                 ),
               if (!isLandscape)
                 Container(
-                    height: (mediaQuery.size.height -
-                            appBar.preferredSize.height -
-                            mediaQuery.padding.top) *
-                        0.3,
-                    child: Chart(_recentTransaction)),
+                    // height: (mediaQuery.size.height -
+                    //         appBar.preferredSize.height -
+                    //         mediaQuery.padding.top) *
+                    //     0.3,
+                    child: Container()),
               if (!isLandscape) txListWidget,
               if (isLandscape)
                 _showChart
@@ -200,21 +202,21 @@ class _MyHomePageState extends State<MyHomePage> with WidgetsBindingObserver {
                                 appBar.preferredSize.height -
                                 mediaQuery.padding.top) *
                             0.7,
-                        child: Chart(_recentTransaction))
+                        child: Container())
                     : txListWidget,
             ]),
       ),
-      // floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-      // floatingActionButton: Platform.isIOS
-      //     ? Container()
-      //     : FloatingActionButton(
-      //         backgroundColor: Colors.amber,
-      //         onPressed: () => _startAddNewTransaction(context),
-      //         child: Icon(
-      //           Icons.add,
-      //           color: Colors.black,
-      //         ),
-      //       ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+      floatingActionButton: Platform.isIOS
+          ? Container()
+          : FloatingActionButton(
+              backgroundColor: Colors.green,
+              onPressed: () => _startAddNewTransaction(context),
+              child: Icon(
+                Icons.add,
+                color: Colors.white,
+              ),
+            ),
     );
   }
 }

@@ -55,6 +55,13 @@ class Transaction_List extends StatelessWidget {
               : ListView.builder(
                   itemCount: document.length,
                   itemBuilder: (ctx, index) {
+                    void deleteEntry(String id, BuildContext context) {
+                      FirebaseFirestore.instance
+                          .collection('year/$year/$month')
+                          .doc(streamSnapshort.data!.docs[index].id)
+                          .delete();
+                    }
+
                     title = document[index]['title'];
                     amount = document[index]['Amount'];
                     DateTime firebaseDate = DateTime.parse(
@@ -67,14 +74,6 @@ class Transaction_List extends StatelessWidget {
                         .collection('$month')
                         .doc('OXoeJKpuKtuAVpGSYzex')
                         .update({'Spent': '$totleSpent'});
-
-                    void deleteEntry(String id) {
-                      FirebaseFirestore.instance
-                          .collection('year/$year/$month')
-                          .doc(streamSnapshort.data!.docs[index].id)
-                          .delete();
-                      print(streamSnapshort.data!.docs[index]['Id']);
-                    }
 
                     return Card(
                       elevation: 5,
@@ -109,14 +108,16 @@ class Transaction_List extends StatelessWidget {
                             ),
                             trailing: mediaQuery.size.width > 460
                                 ? FlatButton.icon(
-                                    onPressed: () => deleteEntry(itemId),
+                                    onPressed: () =>
+                                        deleteEntry(itemId, context),
                                     icon: Icon(Icons.delete),
                                     textColor: Theme.of(context).errorColor,
                                     label: Text('Delete'))
                                 : IconButton(
                                     icon: Icon(Icons.delete),
                                     color: Theme.of(context).errorColor,
-                                    onPressed: () => deleteEntry(itemId),
+                                    onPressed: () =>
+                                        deleteEntry(itemId, context),
                                   )),
                       ),
                     );
