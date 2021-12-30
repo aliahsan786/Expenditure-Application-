@@ -9,7 +9,6 @@ import 'package:myapp/NavigatorBar.dart';
 import 'package:myapp/widgets/Transaction_List.dart';
 import 'package:myapp/widgets/new_Transaction.dart';
 import 'models/Transaction.dart';
-import 'widgets/chart.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
